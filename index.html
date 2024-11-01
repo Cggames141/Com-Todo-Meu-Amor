@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Minha Velminha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            color: #fff;
+            line-height: 1.6;
+            background-color: #1e1e1e;
+            overflow-x: hidden;
+        }
+
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.6);
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: rgba(245, 76, 109, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-bottom: 5px solid #d84a63;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            font-family: 'Sacramento', cursive;
+        }
+
+        .counter {
+            font-size: 1.8rem;
+            margin-top: 1rem;
+            color: #f0e68c;
+            font-style: italic;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: background-color 0.3s;
+        }
+
+        .content:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .text {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .text h2 {
+            font-size: 2.5rem;
+            color: #d84a63;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .text p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .image img, .video video {
+            width: 350px;
+            height: 620px;
+            border-radius: 8px;
+            border: 2px solid #d84a63;
+        }
+
+        /* Estilos para a galeria */
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+
+        .gallery img {
+            flex: none;
+            width: 450px;
+            height: 650px;
+            margin-right: 1rem;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #d84a63;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(245, 76, 109, 0.8);
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        footer h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .quote {
+            font-style: italic;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-left: 4px solid #d84a63;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        .reflection-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .reflection-section h2 {
+            color: #d84a63;
+            font-size: 2.5rem;
+        }
+
+        .reflection-section p {
+            font-size: 1.2rem;
+        }
+
+        /* Seção de músicas */
+        .music-section {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-section h2 {
+            color: #d84a63;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .music-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .music-list li {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline h2 {
+            color: #d84a63;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Formulário de mensagens */
+        .message-form {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-form h2 {
+            color: #d84a63;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .message-form input, .message-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 2px solid #d84a63;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 10px 15px;
+            background-color: #d84a63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #c23354;
+        }
+    
+</style>
+
+    </style>
+</head>
+<body>
+    <video id="background-video" autoplay loop muted>
+        <source src="videos/175057-852541348.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos em HTML5.
+    </video>
+
+    <header>
+        <h1>Para Minha Velminha ❤️</h1>
+        <div id="time-counter" class="counter"></div>
+    </header>
+
+    <main>
+        <!-- Nossas Histórias -->
+        <section class="content">
+            <div class="text">
+                <h2>Nossa História</h2>
+                <p>Bom... eu sou um completo idiota, podemos assim dizer... Tudo porque demorei tempo demais para perceber 
+                    a garota que iria mudar a minha vida, e bem, essa garota é você... minha cara leitora, me arrependo de 
+                    todas as vezes que te fiz sofrer por conta que você me amava intensamente e seu amor não era correspondido, 
+                    mas enfim estou aqui, para dizer que te amo, é sério, de verdade mesmo, eu te amo de todas as formas 
+                    possíveis, eu sou grato por todos os momentos em que vivemos, sei que fui idiota quando éramos simples 
+                    "AMIGOS", demorei para perceber o quanto lhe amava e me importava, peço desculpas...Quando eu quase te perdi, vi minha vida inteira virando cinzas e se disperssando no espaço
+                    eu não quis acreditar que perderia mais uma vez, então eu apelei, fiz uma coisa que você não sabia até então, eu chorei, orei, e clamei para que Deus abrisse seus olhos, não mais para ficar comigo,
+                    mas...Para que você não fosse enganada, não caisse em mãoes erradas, e sim quevocê encontrasse alguem de verdade, alguem que lhe respeitasse, cuidasse e protegesse...Se funcionou eu não sei, só o
+                    que eu sei é que eu te amo garota, de verdade mesmo, sou feliz ao seu lado, e grato por Deus me dar uma mulher igual a você, Te amo!</p>
+                <div class="quote">"O amor é a força mais sutil do mundo." - Mahatma Gandhi</div>
+            </div>
+            <div class="video">
+                <video controls>
+                    <source src="videos/Video.Guru_20241031_203402861 (1).mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos em HTML5.
+                </video>
+            </div>
+        </section>
+
+        <!-- Nossos Momentos -->
+        <section class="content">
+            <div class="text">
+                <h2>Nossos Momentos</h2>
+                <p>Cada momento em que passamos juntos foi mais que um simples e meros momentos, foram lembranças, memórias que foram criadas e ficam guardadas em nossas mentes e corações...</p>
+                <div class="quote">"Amar é encontrar na felicidade do outro a própria felicidade." - Gottfried Leibniz</div>
+            </div>
+            <div class="gallery">
+                <img src="momentos/IMG-20241028-WA0082.jpg" alt="Momento 1">
+                <img src="momentos/IMG-20241028-WA0083.jpg" alt="Momento 2">
+                <img src="momentos/IMG-20241028-WA0098.jpg" alt="Momento 3">
+                <img src="momentos/IMG-20241028-WA0118.jpg" alt="Momento 4">
+                <img src="momentos/IMG-20241028-WA0111.jpg" alt="Momento 5">
+            </div>
+        </section>
+
+        <!-- Reflexões sobre o Amor -->
+        <section class="reflection-section">
+            <h2>Reflexões sobre o Amor</h2>
+            <p>O amor é como um mar, onde navegamos juntos, enfrentando tempestades e aproveitando dias de sol.</p>
+            <div class="quote">"O amor não tem cura, mas é a única cura para todos os males." - Leonard Cohen</div>
+        </section>
+
+        <!-- Planos para o Futuro -->
+        <section class="reflection-section">
+            <h2>Planos para o Futuro</h2>
+            <p> Meus planos após a faculdade, se assim Deus quiser...É me casar com a mesma garota que me um dia chamou de vizinho, e vivia me mandando mensagens para puxar assunto, pergintando "Acabou a luz ai também?" sim eu me lembro
+                me lembro de cada detalhe, kkkk alguns até engraçados, mas enfim o que eu quero realmente...É contruir uma fámilia com você, ter algo em que me orgulhar, com diz você, ter lindos filhos uma linda casa, e o nosso cachorrinho, meu amor nossa vida vai ser perfeita!
+            </p>
+            <div class="quote">"O futuro pertence àqueles que acreditam na beleza de seus sonhos." - Eleanor Roosevelt</div>
+        </section>
+
+        <!-- Mensagem do Coração -->
+        <section class="reflection-section">
+            <h2>Uma Mensagem do Meu Coração</h2>
+            <p>Você é a razão do meu sorriso e o motivo pelo qual meu coração bate mais forte. Agradeço todos os dias por ter você 
+                na minha vida. Te amo, minha eterna namorada!</p>
+            <div class="quote">"Amar é viver, e viver é amar." - Paulo Coelho</div>
+        </section>
+
+        <!-- Seção de Músicas -->
+        <section class="music-section">
+            <h2>Nossas Músicas Favoritas</h2>
+            <ul class="music-list">
+                <li>1. "I Wanna be Yours" - Ed Sheeran</li>
+                <li>2. "I Wanna Ne Your Girlfriend" - John Legend</li>
+                <li>3. "Evidências" - Chitãozinho e Xororó</li>
+            
+            </ul>
+        </section>
+
+        <!-- Linha do Tempo do Relacionamento -->
+        <section class="timeline">
+            <h2>Nossa Linha do Tempo</h2>
+            <div class="timeline-item">
+                <h3>A indecisão</h3>
+                <p>Foi o dia em que nossas vidas mudaram para sempre.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Nosso Primeiro Beijo</h3>
+                <p>Um momento mágico que nunca esquecerei, ao som de evidências kkkk</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Dia dos Namorados</h3>
+                <p>Celebrando o dia e ao mesmo tempo surgiu um pedido de namoro!</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Primeiro Encontro</h3>
+                <p>Nossa passeio na cidade, rimos muito, nos divertimos demais, obrigado por esse momentos!</p>
+            </div>
+            
+        </section>
+
+        <!-- Seção de Cartas ou Mensagens -->
+        <section class="message-form">
+            <h2>Deixe uma Mensagem</h2>
+            <form>
+                <input type="text" placeholder="Seu Nome" required>
+                <textarea rows="4" placeholder="Sua Mensagem..." required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <!-- Mensagem Final -->
+        <footer>
+            <h2>Te amo muito!</h2>
+            <p>Com amor, sempre seu... ❤️</p>
+        </footer>
+
+        <!-- Botão para voltar ao topo -->
+        <button class="back-to-top" onclick="scrollToTop()">Voltar ao Topo</button>
+    </main>
+
+    <script>
+        const startDate = new Date("2024-06-30T00:00:00"); // Data de início do relacionamento
+        const timeCounter = document.getElementById('time-counter');
+
+        setInterval(() => {
+            const currentDate = new Date();
+            const difference = currentDate - startDate;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            timeCounter.innerHTML = `Juntos há ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos.`;
+        }, 1000);
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
